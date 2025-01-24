@@ -15,18 +15,15 @@
     <artifactId>mini-chat-dev</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>mini-chat-dev</name>
-    <modules>
-        <module>mini-chat-common</module>
-    </modules>
 
     <packaging>pom</packaging>
 
-<!--    <modules>-->
-<!--        <module>mini-chat-common</module>-->
-<!--        <module>mini-chat-pojo</module>-->
-<!--        <module>mini-chat-api</module>-->
-<!--        <module>mini-chat-gateway</module>-->
-<!--    </modules>-->
+    <modules>
+        <module>mini-chat-common</module>
+        <module>mini-chat-pojo</module>
+        <module>mini-chat-api</module>
+    </modules>
+
 
     <properties>
         <java.version>17</java.version>
@@ -46,10 +43,10 @@
         <commons-lang3.version>3.12.0</commons-lang3.version>
         <commons-fileupload.version>1.4</commons-fileupload.version>
         <commons-io.version>2.11.0</commons-io.version>
-        <zxing.version>3.4.1</zxing.version>
+        <hutool.version>5.7.17</hutool.version>
 
         <!-- MinIO 相关版本 -->
-        <minio.version>8.4.5</minio.version>
+        <minio.version>8.4.6</minio.version>
         <okhttp.version>4.8.1</okhttp.version>
 
         <!-- Spring Boot 相关版本 -->
@@ -119,9 +116,9 @@
                 <version>${commons-io.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.google.zxing</groupId>
-                <artifactId>core</artifactId>
-                <version>${zxing.version}</version>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
             </dependency>
 
             <!-- MinIO 相关 -->
@@ -130,6 +127,7 @@
                 <artifactId>minio</artifactId>
                 <version>${minio.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>com.squareup.okhttp3</groupId>
                 <artifactId>okhttp</artifactId>

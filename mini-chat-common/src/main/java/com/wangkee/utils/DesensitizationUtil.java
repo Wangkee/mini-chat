@@ -1,4 +1,4 @@
-package utils;
+package com.wangkee.utils;
 
 /**
  * 通用脱敏工具类

@@ -1,19 +1,10 @@
-package utils;
+package com.wangkee.utils;
 
-import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
-import org.springframework.data.redis.connection.RedisConnection;
-import org.springframework.data.redis.connection.StringRedisConnection;
-import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 
@@ -26,17 +17,21 @@ public class RedisOperator {
 	// ---------------------------- 字符串操作 ---------------------------- //
 
 	// 设置字符串值
-	public void setString(String key, String value, long timeout, TimeUnit unit) {
+	public void set(String key, String value, long timeout, TimeUnit unit) {
 		redisTemplate.opsForValue().set(key, value, timeout, unit);
 	}
 
+	public void set(String key, String value, long timeout) {
+		redisTemplate.opsForValue().set(key, value, timeout, TimeUnit.SECONDS);
+	}
+
 	// 获取字符串值
-	public String getString(String key) {
+	public String get(String key) {
 		return redisTemplate.opsForValue().get(key);
 	}
 
 	// 删除字符串
-	public void deleteString(String key) {
+	public void delete(String key) {
 		redisTemplate.delete(key);
 	}
 

@@ -9,6 +9,7 @@
     </parent>
 
     <artifactId>mini-chat-common</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
 
     <dependencies>
         <!-- 1. Spring Boot 基础依赖 -->
@@ -28,6 +29,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-test</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
 
         <!-- 2. Spring Cloud 相关依赖 -->
         <!-- Nacos 注册中心 -->
@@ -121,6 +127,10 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
         </dependency>
     </dependencies>
 </project>

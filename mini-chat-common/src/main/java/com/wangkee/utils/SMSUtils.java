@@ -1,4 +1,4 @@
-package utils;
+package com.wangkee.utils;
 
 import org.springframework.stereotype.Component;
 

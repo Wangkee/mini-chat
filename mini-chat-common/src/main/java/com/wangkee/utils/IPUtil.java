@@ -1,4 +1,4 @@
-package utils;
+package com.wangkee.utils;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpHeaders;

@@ -1,4 +1,4 @@
-package result;
+package com.wangkee.result;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
