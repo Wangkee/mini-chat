@@ -1,8 +1,12 @@
 package com.wangkee.po;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.wangkee.utils.LocalDateUtils;
 import lombok.*;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -38,7 +42,8 @@ public class User implements Serializable {
     /**
      * 生日
      */
-    private Date birthday;
+    @JsonFormat(pattern = LocalDateUtils.DATE_PATTERN)
+    private LocalDate birthday;
     /**
      * 用户头像
      */
@@ -66,10 +71,10 @@ public class User implements Serializable {
     /**
      * 创建时间
      */
-    private Date createdTime;
+    private LocalDateTime createdTime;
     /**
      * 更新时间
      */
-    private Date updatedTime;
+    private LocalDateTime  updatedTime;
 
 }

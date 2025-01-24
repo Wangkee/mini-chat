@@ -1,18 +1,18 @@
-package com.wangkee.validate.phone;
+package com.wangkee.validate.nickname;
 
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-public class PhoneNumberValidator implements ConstraintValidator<PhoneNumber, String> {
+public class NicknameValidator implements ConstraintValidator<Nickname, String> {
 
-    private static final String PHONE_NUMBER_PATTERN = "^1[3-9]\\d{9}$";
-
+    // 校验方法，返回 true 为校验通过，false 为校验失败
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
         if (value == null) {
             return true;
         }
-        return value.matches(PHONE_NUMBER_PATTERN);
+
+        return !value.isEmpty() && value.length() <= 10;
     }
 }

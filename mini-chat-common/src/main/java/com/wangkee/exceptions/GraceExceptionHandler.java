@@ -44,6 +44,7 @@ public class GraceExceptionHandler {
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public JSONResult handleGenericException(Exception e) {
+        e.printStackTrace();
         return JSONResult.error();
     }
 
