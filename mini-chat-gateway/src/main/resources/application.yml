@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: mini-chat-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        username: nacos
+        password: nacos
+        service: mini-chat-gateway
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: userRoute
+          uri: lb://api-8890-user-service
+          predicates:
+            - Path=/auth/**, /user/**
+        - id: fileRoute
+          uri: lb://api-8891-file-service
+          predicates:
+            - Path=/file/**
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      database: 1
+  main:
+    web-application-type: reactive
+
+server:
+  port: 1000
+  tomcat:
+    max-swallow-size: -1

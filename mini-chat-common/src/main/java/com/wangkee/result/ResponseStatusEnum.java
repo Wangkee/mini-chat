@@ -23,8 +23,9 @@ public enum ResponseStatusEnum {
     SMS_NEED_WAIT(5053,false,"短信发送太快啦~请稍后再试！"),
 
 
+    FILE_SYSTEM_ERROR(510, false, "文件系统异常"),
     FILE_UPLOAD_NULL(510,false,"文件不能为空，请选择一个文件再上传！"),
-    FILE_UPLOAD_FAILED(511,false,"文件上传失败！"),
+    FILE_UPLOAD_FAILED(511,false,"文件上传失败, 请稍后再试！"),
     FILE_WRONG_FORMAT(512,false,"文件格式不支持！"),
     FILE_NOT_EXIST_ERROR(514,false,"你所查看的文件不存在！");
 

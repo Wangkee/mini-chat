@@ -22,6 +22,7 @@
         <module>mini-chat-common</module>
         <module>mini-chat-pojo</module>
         <module>mini-chat-api</module>
+        <module>mini-chat-gateway</module>
     </modules>
 
 
@@ -46,11 +47,14 @@
         <hutool.version>5.7.17</hutool.version>
 
         <!-- MinIO 相关版本 -->
-        <minio.version>8.4.6</minio.version>
+        <minio.version>8.4.5</minio.version>
         <okhttp.version>4.8.1</okhttp.version>
 
         <!-- Spring Boot 相关版本 -->
         <spring-boot-starter.version>3.0.13</spring-boot-starter.version>
+
+        <!--  腾讯云cos      -->
+        <cos_api.version>5.6.54</cos_api.version>
     </properties>
 
 
@@ -122,16 +126,13 @@
             </dependency>
 
             <!-- MinIO 相关 -->
-            <dependency>
-                <groupId>io.minio</groupId>
-                <artifactId>minio</artifactId>
-                <version>${minio.version}</version>
-            </dependency>
 
+
+            <!--  腾讯云cos -->
             <dependency>
-                <groupId>com.squareup.okhttp3</groupId>
-                <artifactId>okhttp</artifactId>
-                <version>${okhttp.version}</version>
+                <groupId>com.qcloud</groupId>
+                <artifactId>cos_api</artifactId>
+                <version>${cos_api.version}</version>
             </dependency>
 
             <!-- Spring Boot -->

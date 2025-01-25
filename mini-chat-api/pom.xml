@@ -12,7 +12,9 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>base-service</module>
         <module>api-8890-user-service</module>
+        <module>api-8891-file-service</module>
     </modules>
 
     <dependencies>
