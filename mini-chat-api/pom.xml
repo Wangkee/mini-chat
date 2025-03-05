@@ -15,6 +15,7 @@
         <module>base-service</module>
         <module>api-8890-user-service</module>
         <module>api-8891-file-service</module>
+        <module>api-8892-social-service</module>
     </modules>
 
     <dependencies>

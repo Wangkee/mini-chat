@@ -1,7 +1,10 @@
 package com.wangkee.service.impl;
 
+import cn.hutool.core.lang.Snowflake;
+import cn.hutool.core.util.IdUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wangkee.bo.UpdateUserInfoBO;
+import com.wangkee.enums.Gender;
 import com.wangkee.exceptions.BusinessException;
 import com.wangkee.mapper.UserMapper;
 import com.wangkee.po.User;
@@ -16,10 +19,14 @@ import java.lang.reflect.Field;
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
+    /**
+     * 更新用户信息
+     */
     @Override
     public UserVO updateUserInfo(UpdateUserInfoBO updateUserInfoBO, Long userId) {
         User user = getById(userId);
         updateAttributes(user, updateUserInfoBO);
+        user.setUpdatedTime(System.currentTimeMillis());
 
         updateById(user);
 
@@ -27,6 +34,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         BeanUtils.copyProperties(user, usersVO);
         return usersVO;
     }
+
 
     private void updateAttributes(User user, UpdateUserInfoBO updateUserInfoBO)  {
         if (updateUserInfoBO == null || user == null) {
@@ -40,7 +48,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
             // 遍历UpdateUserInfoBO中的字段
             for (Field boField : boFields) {
-                boField.setAccessible(true); // 设置字段可访问
+                boField.setAccessible(true);
                 Object boValue = boField.get(updateUserInfoBO);
 
                 // 如果字段值不为null

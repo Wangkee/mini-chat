@@ -22,12 +22,15 @@ public enum ResponseStatusEnum {
     SMS_CODE_ERROR(5052,false,"验证码过期或不匹配！"),
     SMS_NEED_WAIT(5053,false,"短信发送太快啦~请稍后再试！"),
 
+    FILE_SYSTEM_ERROR(5061, false, "文件系统异常"),
+    FILE_UPLOAD_NULL(5062,false,"文件不能为空，请选择一个文件再上传！"),
+    FILE_UPLOAD_FAILED(5063,false,"文件上传失败, 请稍后再试！"),
+    FILE_WRONG_FORMAT(5064,false,"文件格式不支持！"),
+    FILE_NOT_EXIST_ERROR(5065,false,"你所查看的文件不存在！"),
 
-    FILE_SYSTEM_ERROR(510, false, "文件系统异常"),
-    FILE_UPLOAD_NULL(510,false,"文件不能为空，请选择一个文件再上传！"),
-    FILE_UPLOAD_FAILED(511,false,"文件上传失败, 请稍后再试！"),
-    FILE_WRONG_FORMAT(512,false,"文件格式不支持！"),
-    FILE_NOT_EXIST_ERROR(514,false,"你所查看的文件不存在！");
+    FRIENDSHIP_NOT_EXIST(5071, false, "您与对方不是好友, 请先添加好友!");
+
+
 
     // 响应业务状态
     private final Integer status;

@@ -37,6 +37,12 @@ public class AuthServiceImpl extends ServiceImpl<UserMapper, User>
     private RedisOperator redis;
 
 
+    /**
+     * 发送验证码的业务实现
+     * 1. 从redis验证是否能够发送新的验证码（60s只能发送一次）
+     * 2. 异步调用短信接口发送验证码
+     * 3. 将用户手机号与验证码的对应关系存入redis中
+     */
     @Override
     public void getSMSCode(String mobile) {
         String isLimited = redis.get(AuthConstants.SMS_LIMITED + mobile);
@@ -121,6 +127,10 @@ public class AuthServiceImpl extends ServiceImpl<UserMapper, User>
         user.setChatNum(mobile);
         user.setGender(Gender.SECRET.type);
         user.setNickname("用户" + mobile);
+
+        Long currentTime = System.currentTimeMillis();
+        user.setUpdatedTime(currentTime);
+        user.setCreatedTime(currentTime);
 
         userMapper.insert(user);
 

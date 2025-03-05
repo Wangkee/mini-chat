@@ -38,7 +38,6 @@ public class AuthController {
 
     @PostMapping("/login")
     public JSONResult login(@RequestBody @Validated RegistLoginBO bo) {
-
         UserVO usersVO = authService.loginOrRegister(
                 bo.getMobile(), bo.getSmsCode(), true
         );

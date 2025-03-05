@@ -10,6 +10,7 @@ import com.wangkee.utils.SMSUtils;
 @Component
 @Slf4j
 public class SMSTask {
+
     @Resource
     private SMSUtils smsUtils;
 

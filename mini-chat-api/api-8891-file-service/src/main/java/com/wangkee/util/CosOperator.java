@@ -33,7 +33,7 @@ public class CosOperator {
             PutObjectRequest putObjectRequest = new PutObjectRequest(
                     bucketName,
                     fileName,
-                    file.getInputStream(), // 直接使用 InputStream
+                    file.getInputStream(),
                     metadata
             );
             cosClient.putObject(putObjectRequest);
