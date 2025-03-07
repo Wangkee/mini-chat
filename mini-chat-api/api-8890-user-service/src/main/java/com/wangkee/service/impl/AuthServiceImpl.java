@@ -5,7 +5,11 @@ import cn.hutool.core.util.IdUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wangkee.constants.AuthConstants;
+import com.wangkee.mapper.FollowCountMapper;
+import com.wangkee.mapper.PostCountMapper;
 import com.wangkee.mapper.UserMapper;
+import com.wangkee.po.FollowCount;
+import com.wangkee.po.PostCount;
 import com.wangkee.service.AuthService;
 import com.wangkee.tasks.SMSTask;
 import com.wangkee.enums.Gender;
@@ -18,8 +22,10 @@ import com.wangkee.po.User;
 import com.wangkee.result.ResponseStatusEnum;
 import com.wangkee.utils.RedisOperator;
 import com.wangkee.vo.UserVO;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
+import java.util.Random;
 import java.util.UUID;
 
 
@@ -29,6 +35,12 @@ public class AuthServiceImpl extends ServiceImpl<UserMapper, User>
 
     @Resource
     private UserMapper userMapper;
+
+    @Resource
+    private FollowCountMapper followCountMapper;
+
+    @Resource
+    private PostCountMapper postCountMapper;
 
     @Resource
     private SMSTask smsTask;
@@ -63,6 +75,7 @@ public class AuthServiceImpl extends ServiceImpl<UserMapper, User>
 
 
     @Override
+    @Transactional
     public UserVO loginOrRegister(String mobile, String code, boolean isLogin) {
         validateSMSCode(mobile, code);
 
@@ -119,10 +132,11 @@ public class AuthServiceImpl extends ServiceImpl<UserMapper, User>
     }
 
     public User createUser(String mobile) {
-        User user = new User();
-
         Snowflake snowflake = IdUtil.getSnowflake(0L, 0L);
-        user.setId(snowflake.nextId());
+        Long userId = snowflake.nextId();
+
+        User user = new User();
+        user.setId(userId);
         user.setMobile(mobile);
         user.setChatNum(mobile);
         user.setGender(Gender.SECRET.type);
@@ -133,6 +147,14 @@ public class AuthServiceImpl extends ServiceImpl<UserMapper, User>
         user.setCreatedTime(currentTime);
 
         userMapper.insert(user);
+
+        FollowCount followCount = new FollowCount();
+        followCount.setUserId(userId);
+        followCountMapper.insert(followCount);
+
+        PostCount postCount = new PostCount();
+        postCount.setUserId(userId);
+        postCountMapper.insert(postCount);
 
         return user;
     }

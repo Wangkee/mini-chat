@@ -16,7 +16,7 @@ import java.util.Objects;
 
 @Validated
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 public class AuthController {
 
     @Resource

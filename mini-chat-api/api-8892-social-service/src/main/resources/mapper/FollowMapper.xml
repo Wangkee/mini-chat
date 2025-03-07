@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wangkee.mapper.FollowMapper">
+
+
+    <select id="queryFollowingList" resultType="com.wangkee.vo.FollowListItemVO">
+        select
+            f.followee as userId,
+            u.nickname as nickname,
+            f.remark as remark,
+            u.avatar as avatar,
+            u.signature as signature,
+            fc.follower_count as followerCount,
+            pc.count as postCount,
+            case
+                when mf.follower is not null then 2
+                else 1
+                end as followStatus
+        from
+            follow as f
+
+                left join user as u on f.followee = u.id
+                left join follow_count as fc on f.followee = fc.user_id
+                left join post_count as pc on f.followee = pc.user_id
+                left join follow as mf on f.followee = mf.follower and mf.followee = f.follower
+
+        where
+            f.follower = 1
+        order by
+            f.created_at
+        desc
+
+
+    </select>
+    <select id="queryFollowerList" resultType="com.wangkee.vo.FollowListItemVO">
+        select
+            f.follower as userId,
+            u.nickname as nickname,
+            f.remark as remark,
+            u.avatar as avatar,
+            u.signature as signature,
+            fc.follower_count as followerCount,
+            pc.count as postCount,
+            case
+                when mf.follower is not null then 2
+                else 0
+                end as followStatus
+        from
+            follow as f
+
+                left join user as u on f.follower = u.id
+                left join follow_count as fc on f.follower = fc.user_id
+                left join post_count as pc on f.follower = pc.user_id
+                left join follow as mf on f.follower = mf.followee and mf.follower = f.followee
+
+        where
+            f.followee = #{userId}
+        order by
+            f.created_at
+                desc
+
+    </select>
+</mapper>

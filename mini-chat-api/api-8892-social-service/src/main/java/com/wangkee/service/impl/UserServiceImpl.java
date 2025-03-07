@@ -1,10 +1,7 @@
 package com.wangkee.service.impl;
 
-import cn.hutool.core.lang.Snowflake;
-import cn.hutool.core.util.IdUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wangkee.bo.UpdateUserInfoBO;
-import com.wangkee.enums.Gender;
 import com.wangkee.exceptions.BusinessException;
 import com.wangkee.mapper.UserMapper;
 import com.wangkee.po.User;

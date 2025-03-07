@@ -10,8 +10,8 @@ import lombok.*;
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value ="friendship")
-public class Friendship{
+@TableName(value ="follows")
+public class Follow {
 
     /**
      * 主键 id
@@ -20,34 +20,34 @@ public class Friendship{
     private Long id;
 
     /**
-     * 用户 id
+     * 关注者
      */
-    @TableField(value = "user_id")
-    private Long userId;
+    @TableField(value = "follower")
+    private Long follower;
 
     /**
-     * 好友 id
+     * 被关注者
      */
-    @TableField(value = "friend_id")
-    private Long friendId;
+    @TableField(value = "followee")
+    private Long followee;
 
     /**
-     * 用户给好友的备注
+     * 是否置顶聊天 0是 1否
+     */
+    @TableField(value = "totop")
+    private Boolean totop;
+
+    /**
+     * 是否消息免打扰 0是 1否
+     */
+    @TableField(value = "muted")
+    private Boolean muted;
+
+    /**
+     * 备注
      */
     @TableField(value = "remark")
     private String remark;
-
-    /**
-     * 是否仅聊天，0表示否，1表示是
-     */
-    @TableField(value = "chatonly")
-    private Boolean chatOnly;
-
-    /**
-     * 是否拉黑好友，0表示否，1表示是
-     */
-    @TableField(value = "blocked")
-    private Boolean blocked;
 
     /**
      * 创建时间
