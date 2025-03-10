@@ -1,4 +1,4 @@
-package com.wangkee.bo;
+package com.wangkee.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.wangkee.validate.chatNum.ChatNum;
@@ -7,7 +7,6 @@ import com.wangkee.validate.phone.PhoneNumber;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,7 +19,7 @@ import java.time.LocalDate;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class UpdateUserInfoBO {
+public class UpdateUserInfoDTO {
 
     @ChatNum
     private String chatNum;
@@ -43,7 +42,7 @@ public class UpdateUserInfoBO {
     @Email
     private String email;
 
-    @Length(max = 16, message = "个性签名长度不能大于30")
+    @Length(max = 30, message = "个性签名长度不能大于30")
     private String signature;
 
     private String school;

@@ -1,4 +1,4 @@
-package com.wangkee.bo;
+package com.wangkee.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -13,7 +13,7 @@ import com.wangkee.validate.phone.PhoneNumber;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class RegistLoginBO {
+public class RegistLoginDTO {
 
     @PhoneNumber
     private String mobile;

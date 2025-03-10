@@ -28,8 +28,8 @@ public enum ResponseStatusEnum {
     FILE_WRONG_FORMAT(5064,false,"文件格式不支持！"),
     FILE_NOT_EXIST_ERROR(5065,false,"你所查看的文件不存在！"),
 
-    FRIENDSHIP_NOT_EXIST(5071, false, "您与对方不是好友, 请先添加好友!");
-
+    FOLLOWSHIP_NOT_EXIST(5071, false, "您与对方不是好友, 请先添加好友!"),
+    FOLLOWSHIP_ALREADY_EXIST(5072, false, "您已关注对方!");
 
 
     // 响应业务状态

@@ -1,7 +1,7 @@
 package com.wangkee.controller;
 
 import com.wangkee.aspect.loginAspect.LoginApi;
-import com.wangkee.bo.UpdateUserInfoBO;
+import com.wangkee.dto.UpdateUserInfoDTO;
 import com.wangkee.result.JSONResult;
 import com.wangkee.service.UserService;
 import com.wangkee.utils.UserContext;
@@ -22,9 +22,9 @@ public class UserController {
 
     @LoginApi
     @PostMapping("/api/update")
-    public JSONResult updateUserInfo(@Validated @RequestBody UpdateUserInfoBO updateUserInfoBO){
+    public JSONResult updateUserInfo(@Validated @RequestBody UpdateUserInfoDTO updateUserInfoDTO){
         Long userId = UserContext.getUser();
-        UserVO userVO = userService.updateUserInfo(updateUserInfoBO, userId);
+        UserVO userVO = userService.updateUserInfo(updateUserInfoDTO, userId);
         return JSONResult.ok(userVO);
     }
 }

@@ -29,8 +29,8 @@ https://console.cloud.tencent.com/cam/capi
 ```yaml
 tencent:
   cos:
-    secretId: AKIDxmRvGRREnPtAHBzc3HI8lDRbr14ub7Sa
-    secretKey: 61lMnvvW0Ur20xoZClXAct32oPp7HG4g
+    secretId: xxx
+    secretKey: xxx
     region: ap-nanjing
     bucketName: mini-chat-1256268720
 ```

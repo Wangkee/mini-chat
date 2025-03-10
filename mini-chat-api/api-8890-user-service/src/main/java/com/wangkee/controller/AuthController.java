@@ -1,6 +1,6 @@
 package com.wangkee.controller;
 
-import com.wangkee.bo.RegistLoginBO;
+import com.wangkee.dto.RegistLoginDTO;
 import com.wangkee.exceptions.BusinessException;
 import com.wangkee.result.ResponseStatusEnum;
 import com.wangkee.service.AuthService;
@@ -29,7 +29,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public JSONResult register(@RequestBody @Validated RegistLoginBO bo){
+    public JSONResult register(@RequestBody @Validated RegistLoginDTO bo){
         UserVO usersVO = authService.loginOrRegister(
                 bo.getMobile(), bo.getSmsCode(), false
         );
@@ -37,7 +37,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public JSONResult login(@RequestBody @Validated RegistLoginBO bo) {
+    public JSONResult login(@RequestBody @Validated RegistLoginDTO bo) {
         UserVO usersVO = authService.loginOrRegister(
                 bo.getMobile(), bo.getSmsCode(), true
         );

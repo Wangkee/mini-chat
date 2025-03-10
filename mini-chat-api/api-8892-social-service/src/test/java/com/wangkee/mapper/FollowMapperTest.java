@@ -1,13 +1,11 @@
 package com.wangkee.mapper;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.wangkee.utils.PagedResult;
 import com.wangkee.vo.FollowListItemVO;
 import jakarta.annotation.Resource;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class FollowMapperTest {
@@ -17,13 +15,13 @@ class FollowMapperTest {
 
     @Test
     public void testQueryFollowingList(){
-        List<FollowListItemVO> followListItemVOS = followMapper.queryFollowingList(1L);
-        System.out.println(followListItemVOS);
+        Page<FollowListItemVO> result = followMapper.queryFollowingList(new Page<>(1L,1L),1L);
+        System.out.println(PagedResult.assemblePagedGridResult(result));
     }
 
     @Test
     public void testQueryFollowerList(){
-        List<FollowListItemVO> followListItemVOS = followMapper.queryFollowerList(1L);
-        System.out.println(followListItemVOS);
+        Page<FollowListItemVO> result = followMapper.queryFollowerList(new Page<>(1L,1L),1L);
+        System.out.println(PagedResult.assemblePagedGridResult(result));
     }
 }

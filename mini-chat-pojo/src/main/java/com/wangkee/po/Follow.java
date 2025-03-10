@@ -10,7 +10,7 @@ import lombok.*;
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value ="follows")
+@TableName(value ="follow")
 public class Follow {
 
     /**

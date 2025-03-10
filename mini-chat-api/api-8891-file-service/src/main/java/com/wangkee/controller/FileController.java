@@ -1,7 +1,7 @@
 package com.wangkee.controller;
 
 import com.wangkee.aspect.loginAspect.LoginApi;
-import com.wangkee.bo.UpdateUserInfoBO;
+import com.wangkee.dto.UpdateUserInfoDTO;
 import com.wangkee.feign.UserServiceFeign;
 import com.wangkee.result.JSONResult;
 import com.wangkee.util.CosOperator;
@@ -26,10 +26,10 @@ public class FileController {
         Long userId = UserContext.getUser();
         String fileUrl = cosOperator.uploadFile(file, userId, "avatar");
 
-        UpdateUserInfoBO updateUserInfoBO = new UpdateUserInfoBO();
-        updateUserInfoBO.setAvatar(fileUrl);
+        UpdateUserInfoDTO updateUserInfoDTO = new UpdateUserInfoDTO();
+        updateUserInfoDTO.setAvatar(fileUrl);
 
-        return userServiceFeign.updateUserInfo(updateUserInfoBO);
+        return userServiceFeign.updateUserInfo(updateUserInfoDTO);
     }
 
     @LoginApi
@@ -38,9 +38,9 @@ public class FileController {
         Long userId = UserContext.getUser();
         String fileUrl = cosOperator.uploadFile(file, userId, "homepageImg");
 
-        UpdateUserInfoBO updateUserInfoBO = new UpdateUserInfoBO();
-        updateUserInfoBO.setHomepageImg(fileUrl);
+        UpdateUserInfoDTO updateUserInfoDTO = new UpdateUserInfoDTO();
+        updateUserInfoDTO.setHomepageImg(fileUrl);
 
-        return userServiceFeign.updateUserInfo(updateUserInfoBO);
+        return userServiceFeign.updateUserInfo(updateUserInfoDTO);
     }
 }

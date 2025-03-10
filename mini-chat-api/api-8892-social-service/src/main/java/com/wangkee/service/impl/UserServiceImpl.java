@@ -1,7 +1,7 @@
 package com.wangkee.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.wangkee.bo.UpdateUserInfoBO;
+import com.wangkee.dto.UpdateUserInfoDTO;
 import com.wangkee.exceptions.BusinessException;
 import com.wangkee.mapper.UserMapper;
 import com.wangkee.po.User;
@@ -20,9 +20,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      * 更新用户信息
      */
     @Override
-    public UserVO updateUserInfo(UpdateUserInfoBO updateUserInfoBO, Long userId) {
+    public UserVO updateUserInfo(UpdateUserInfoDTO updateUserInfoDTO, Long userId) {
         User user = getById(userId);
-        updateAttributes(user, updateUserInfoBO);
+        updateAttributes(user, updateUserInfoDTO);
         user.setUpdatedTime(System.currentTimeMillis());
 
         updateById(user);
@@ -33,20 +33,20 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
 
-    private void updateAttributes(User user, UpdateUserInfoBO updateUserInfoBO)  {
-        if (updateUserInfoBO == null || user == null) {
+    private void updateAttributes(User user, UpdateUserInfoDTO updateUserInfoDTO)  {
+        if (updateUserInfoDTO == null || user == null) {
             return;
         }
 
         try {
             // 获取UpdateUserInfoBO和User类的所有字段
-            Field[] boFields = updateUserInfoBO.getClass().getDeclaredFields();
+            Field[] boFields = updateUserInfoDTO.getClass().getDeclaredFields();
             Field[] userFields = user.getClass().getDeclaredFields();
 
             // 遍历UpdateUserInfoBO中的字段
             for (Field boField : boFields) {
                 boField.setAccessible(true);
-                Object boValue = boField.get(updateUserInfoBO);
+                Object boValue = boField.get(updateUserInfoDTO);
 
                 // 如果字段值不为null
                 if (boValue != null) {

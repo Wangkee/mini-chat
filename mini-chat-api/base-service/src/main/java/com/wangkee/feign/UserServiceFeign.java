@@ -1,6 +1,6 @@
 package com.wangkee.feign;
 
-import com.wangkee.bo.UpdateUserInfoBO;
+import com.wangkee.dto.UpdateUserInfoDTO;
 import com.wangkee.config.FeignConfig;
 import com.wangkee.result.JSONResult;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -12,5 +12,5 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface UserServiceFeign {
 
     @PostMapping("/user/update")
-    JSONResult updateUserInfo(@Validated @RequestBody UpdateUserInfoBO updateUserInfoBO);
+    JSONResult updateUserInfo(@Validated @RequestBody UpdateUserInfoDTO updateUserInfoDTO);
 }
