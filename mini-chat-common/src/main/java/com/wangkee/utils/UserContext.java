@@ -1,5 +1,8 @@
 package com.wangkee.utils;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class UserContext {
     private static final ThreadLocal<Long> userThreadLocal = new ThreadLocal<>();
 
@@ -17,4 +20,5 @@ public class UserContext {
     public static void clear() {
         userThreadLocal.remove();
     }
+
 }

@@ -1,6 +1,6 @@
 package com.wangkee.interceptors;
 
-import com.wangkee.constants.AuthConstants;
+import com.wangkee.constants.BusinessConstants;
 import com.wangkee.utils.RedisOperator;
 import com.wangkee.utils.UserContext;
 import jakarta.annotation.Resource;
@@ -23,7 +23,7 @@ public class UserInterceptor implements HandlerInterceptor {
             return true;
         }
 
-        String userId = redisOperator.get(AuthConstants.TOKEN_TO_USER + token);
+        String userId = redisOperator.get(BusinessConstants.TOKEN_TO_USER + token);
         if(StringUtils.isBlank(userId)){
             return true;
         }

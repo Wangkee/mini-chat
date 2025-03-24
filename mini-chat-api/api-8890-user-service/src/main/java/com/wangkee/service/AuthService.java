@@ -9,7 +9,7 @@ public interface AuthService extends IService<User> {
 
     void getSMSCode(String mobile);
 
-    UserVO loginOrRegister(String mobile, String code, boolean isLogin);
+    UserVO register(String mobile, String code);
 
     void logout(Long userId);
 }

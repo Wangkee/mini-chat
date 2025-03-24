@@ -25,10 +25,12 @@
                 left join follow as mf on f.followee = mf.follower and mf.followee = f.follower
 
         where
-            f.follower = 1
+            f.follower = #{userId}
         order by
             f.created_at
         desc
+            limit #{pageSize} offset #{offset}
+
 
 
     </select>
@@ -57,7 +59,9 @@
             f.followee = #{userId}
         order by
             f.created_at
-                desc
+        desc
+        limit #{pageSize} offset #{offset}
+
 
     </select>
 </mapper>

@@ -16,12 +16,13 @@ import com.wangkee.po.User;
 import com.wangkee.result.ResponseStatusEnum;
 import com.wangkee.service.FollowService;
 import com.wangkee.utils.PagedResult;
+import com.wangkee.utils.SnowFlakeUtil;
 import com.wangkee.vo.FollowListItemVO;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Objects;
+import java.util.*;
 
 
 @Service
@@ -38,15 +39,15 @@ public class FollowServiceImpl extends ServiceImpl<FollowMapper, Follow>
     private UserMapper userMapper;
 
     @Override
-    public PagedResult queryFollowingList(Integer page, Integer pageSize, Long userId) {
-        Page<FollowListItemVO> result =  followMapper.queryFollowingList(new Page<>(page, pageSize), userId);
-        return PagedResult.assemblePagedGridResult(result);
+    public List<FollowListItemVO> queryFollowingList(Integer page, Integer pageSize, Long userId) {
+        int offset = (page - 1) * pageSize;
+        return followMapper.queryFollowingList(offset, pageSize, userId);
     }
 
     @Override
-    public PagedResult queryFollowerList(Integer page, Integer pageSize,Long userId) {
-        Page<FollowListItemVO> result =  followMapper.queryFollowerList(new Page<>(page, pageSize), userId);
-        return PagedResult.assemblePagedGridResult(result);
+    public List<FollowListItemVO> queryFollowerList(Integer page, Integer pageSize,Long userId) {
+        int offset = (page - 1) * pageSize;
+        return followMapper.queryFollowerList(offset, pageSize, userId);
     }
 
     @Override
@@ -56,8 +57,7 @@ public class FollowServiceImpl extends ServiceImpl<FollowMapper, Follow>
         checkUserExistence(dto.getFollower());
         checkFollowShipExistence(dto.getFollower(), dto.getFollowee(), true);
 
-        Snowflake snowflake = IdUtil.getSnowflake(0L, 0L);
-        Long followShipId = snowflake.nextId();
+        Long followShipId = SnowFlakeUtil.nextId();;
         Long currentTime = System.currentTimeMillis();
 
         Follow follow = new Follow();
@@ -138,6 +138,64 @@ public class FollowServiceImpl extends ServiceImpl<FollowMapper, Follow>
 
         if(Objects.isNull(follow) && !checkUnExistence){
             throw new BusinessException(ResponseStatusEnum.FOLLOWSHIP_NOT_EXIST);
+        }
+    }
+
+
+    @Transactional
+    public void addFollowBatch(List<FollowshipDTO> dtoList) {
+        // 获取 Snowflake ID
+        Long currentTime = System.currentTimeMillis();
+
+        // 批量插入关注关系
+        List<Follow> follows = new ArrayList<>();
+        for (FollowshipDTO dto : dtoList) {
+            Long followShipId = SnowFlakeUtil.nextId();;
+
+            Follow follow = new Follow();
+            follow.setId(followShipId);
+            follow.setFollowee(dto.getFollowee());
+            follow.setFollower(dto.getFollower());
+            follow.setRemark(dto.getRemark());
+            follow.setCreatedAt(currentTime);
+            follow.setUpdatedAt(currentTime);
+
+            follows.add(follow);
+        }
+
+        // 批量插入到数据库
+        saveBatch(follows);
+
+        // 批量更新关注数量
+        Map<Long, Integer> followerUpdateMap = new HashMap<>();
+        Map<Long, Integer> followeeUpdateMap = new HashMap<>();
+
+        for (FollowshipDTO dto : dtoList) {
+            followerUpdateMap.put(dto.getFollower(), followerUpdateMap.getOrDefault(dto.getFollower(), 0) + 1);
+            followeeUpdateMap.put(dto.getFollowee(), followeeUpdateMap.getOrDefault(dto.getFollowee(), 0) + 1);
+        }
+
+        // 批量更新关注者的 FollowingCount 和 被关注者的 FollowerCount
+        for (Map.Entry<Long, Integer> entry : followerUpdateMap.entrySet()) {
+            Long followerId = entry.getKey();
+            Integer countToAdd = entry.getValue();
+
+            FollowCount followerFollowCount = followCountMapper.selectById(followerId);
+            if (followerFollowCount != null) {
+                followerFollowCount.setFollowingCount(followerFollowCount.getFollowingCount() + countToAdd);
+                followCountMapper.updateById(followerFollowCount);
+            }
+        }
+
+        for (Map.Entry<Long, Integer> entry : followeeUpdateMap.entrySet()) {
+            Long followeeId = entry.getKey();
+            Integer countToAdd = entry.getValue();
+
+            FollowCount followeeFollowCount = followCountMapper.selectById(followeeId);
+            if (followeeFollowCount != null) {
+                followeeFollowCount.setFollowerCount(followeeFollowCount.getFollowerCount() + countToAdd);
+                followCountMapper.updateById(followeeFollowCount);
+            }
         }
     }
 }

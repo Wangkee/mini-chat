@@ -1,7 +1,7 @@
 package com.wangkee.aspect.loginAspect;
 
 import cn.hutool.core.util.StrUtil;
-import com.wangkee.constants.AuthConstants;
+import com.wangkee.constants.BusinessConstants;
 import com.wangkee.exceptions.BusinessException;
 import com.wangkee.result.ResponseStatusEnum;
 import com.wangkee.utils.RedisOperator;
@@ -57,7 +57,7 @@ public class LoginAspect {
             return false;
         }
 
-        String userIdStr = redisOperator.get(AuthConstants.TOKEN_TO_USER + token);
+        String userIdStr = redisOperator.get(BusinessConstants.TOKEN_TO_USER + token);
         if(StrUtil.isBlank(userIdStr)){
             return false;
         }

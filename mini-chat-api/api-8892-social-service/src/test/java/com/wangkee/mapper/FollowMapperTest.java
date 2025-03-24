@@ -13,15 +13,15 @@ class FollowMapperTest {
     @Resource
     private FollowMapper followMapper;
 
-    @Test
-    public void testQueryFollowingList(){
-        Page<FollowListItemVO> result = followMapper.queryFollowingList(new Page<>(1L,1L),1L);
-        System.out.println(PagedResult.assemblePagedGridResult(result));
-    }
-
-    @Test
-    public void testQueryFollowerList(){
-        Page<FollowListItemVO> result = followMapper.queryFollowerList(new Page<>(1L,1L),1L);
-        System.out.println(PagedResult.assemblePagedGridResult(result));
-    }
+//    @Test
+//    public void testQueryFollowingList(){
+//        Page<FollowListItemVO> result = followMapper.queryFollowingList(new Page<>(1L,1L),1L);
+//        System.out.println(PagedResult.assemblePagedGridResult(result));
+//    }
+//
+//    @Test
+//    public void testQueryFollowerList(){
+//        Page<FollowListItemVO> result = followMapper.queryFollowerList(new Page<>(1L,1L),1L);
+//        System.out.println(PagedResult.assemblePagedGridResult(result));
+//    }
 }

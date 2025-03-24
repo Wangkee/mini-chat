@@ -17,6 +17,8 @@ public enum ResponseStatusEnum {
     USER_ALREADY_EXIST(5041,false,"该用户已存在，不可重复注册！"),
     USER_NOT_EXIST(5042,false,"该用户不存在，请前往注册！"),
     USER_FROZEN(5043,false,"用户已被冻结，请联系管理员！"),
+    USER_PASSWORD_ERROR(5044,false,"用户名或密码错误！"),
+    LOGIN_TYPE_ERROR(5050,false,"不支持的登录方式！"),
 
     SMS_SEND_FAILED(5051, false, "短信发送失败，请稍后重试！"),
     SMS_CODE_ERROR(5052,false,"验证码过期或不匹配！"),
@@ -29,7 +31,11 @@ public enum ResponseStatusEnum {
     FILE_NOT_EXIST_ERROR(5065,false,"你所查看的文件不存在！"),
 
     FOLLOWSHIP_NOT_EXIST(5071, false, "您与对方不是好友, 请先添加好友!"),
-    FOLLOWSHIP_ALREADY_EXIST(5072, false, "您已关注对方!");
+    FOLLOWSHIP_ALREADY_EXIST(5072, false, "您已关注对方!"),
+
+
+    POST_NOT_EXIST(5081, false, "笔记不存在！"),
+    POST_ALREADY_LIKED(5082, false, "已赞过该笔记，请勿重复点赞");
 
 
     // 响应业务状态

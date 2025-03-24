@@ -15,10 +15,4 @@ public enum FollowStatusEnum {
         this.code = code;
         this.description = description;
     }
-
-
-    @Override
-    public String toString() {
-        return this.description;
-    }
 }

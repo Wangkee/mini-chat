@@ -36,3 +36,18 @@ server:
   port: 8892
   tomcat:
     max-swallow-size: -1
+    threads:
+      max: 1000
+
+snowflake:
+  worker-id: 2
+  datacenter-id: 0
+
+rocketmq:
+  name-server: 127.0.0.1:9876
+  producer:
+    group: my-group-01
+
+#mybatis-plus:
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

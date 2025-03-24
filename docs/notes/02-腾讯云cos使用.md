@@ -12,8 +12,6 @@ https://cloud.tencent.com/act/pro/cosagg?fromSource=gwzcw.8439644.8439644.843964
 
 https://console.cloud.tencent.com/cam/capi
 
-![image-20250304202136064](C:\0wangke\cs\javaprojects\javalearning\mini-chat-dev\docs\notes\imgs\image-20250304202136064.png)
-
 ## 4.引入依赖
 
 ```xml

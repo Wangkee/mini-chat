@@ -43,4 +43,13 @@ public class FileController {
 
         return userServiceFeign.updateUserInfo(updateUserInfoDTO);
     }
+
+    @LoginApi
+    @PostMapping("/upload/postImage")
+    public JSONResult uploadPostImage(@RequestParam("file") MultipartFile file){
+        Long userId = UserContext.getUser();
+        String fileUrl = cosOperator.uploadFile(file, userId, "postImg");
+
+        return JSONResult.ok(fileUrl);
+    }
 }

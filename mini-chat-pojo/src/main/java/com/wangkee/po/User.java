@@ -46,6 +46,11 @@ public class User implements Serializable {
     private Integer gender;
 
     /**
+     * 密码
+     */
+    private String password;
+
+    /**
      * 生日
      */
     @JsonFormat(pattern = LocalDateUtils.DATE_PATTERN)

@@ -1,6 +1,6 @@
 package com.wangkee.config;
 
-import com.wangkee.constants.AuthConstants;
+import com.wangkee.constants.BusinessConstants;
 import com.wangkee.utils.RedisOperator;
 import com.wangkee.utils.UserContext;
 import feign.RequestInterceptor;
@@ -17,7 +17,7 @@ public class FeignConfig implements RequestInterceptor {
     @Override
     public void apply(RequestTemplate template) {
         Long userId = UserContext.getUser();
-        String token = redisOperator.get(AuthConstants.USER_TO_TOKEN + userId);
+        String token = redisOperator.get(BusinessConstants.USER_TO_TOKEN + userId);
         template.header("authorization", token);
     }
 }

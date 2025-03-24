@@ -12,9 +12,12 @@ class AuthServiceImplTest {
     private AuthServiceImpl authService;
 
     @Test
-    public void testCreateUser(){
-        authService.createUser("18800000001");
+    public void testCreateUsers() {
+        for (long i = 18800000000L; i < 18800000000L + 100000; i++) {
+            authService.createMockUser(String.valueOf(i));
+        }
     }
+
 
 
 
